@@ -3,13 +3,13 @@ let gameOver = false;
 
 
 let backgroundColor = new Color(BACKGROUND_COLOR_RED, BACKGROUND_COLOR_GREEN, BACKGROUND_COLOR_BLUE);
-function createObstacle()
+function createObstacle(timeOfCreation)
 {
 	let obstacle = new GameObject(new Vector2(Math.random() * WIDTH, HEIGHT), new Vector2(50, 50));
 	obstacle.velocity.x = player.position.x - obstacle.position.x;
 	obstacle.velocity.y = -Math.random()*500-100;
 	obstacle.color = new Color(Math.random()*255, Math.random()*255, Math.random()*255);
-	obstacle.preparedForRemoval = false;
+	obstacle.timeOfCreation = timeOfCreation;
 	obstacle.safeToTouch = false;
 	while (obstacle.color.equals(backgroundColor))
 	{
@@ -17,7 +17,7 @@ function createObstacle()
 	}
 	obstacle.explode = function()
 	{
-		obstacles.safeToTouch = obstacle.preparedForRemoval = true;
+		obstacles.safeToTouch = true;
 		obstacle.velocity.y = -obstacle.velocity.y;
 		
 		if (obstacle.position.x > player.position.x+player.size.x/2)
@@ -81,6 +81,7 @@ player.onCollision = function(obstacle)
 
 let gameTimePassed = 0;
 let obstaclesCreated = 0;
+let obstacleLifeSpan = 10;
 let points = 0;
 let highestPoints = 0;
 let ricardoMilosTime = 10;
@@ -101,6 +102,7 @@ function update(deltaTime)
 			player.load();
 			player.timePassedAfterAttacking = 0;
 			player.velocity = new Vector2();
+			player.update(deltaTime);
 			player.wake();
 		}
 		return;
@@ -135,6 +137,18 @@ function update(deltaTime)
 	player.update(deltaTime);
 	player.wake();
 	ricardoMilosSprite.update(deltaTime);
+
+	if (Math.floor(gameTimePassed) & this.clearTime)
+	{
+		let newObstacles = [];
+		obstacles.forEach(obstacle => 
+		{
+			if (gameTimePassed - obstacle.timeOfCreation < obstacleLifeSpan)
+				newObstacles.push(ostacle);
+		});
+		obstacles = newObstacles;
+
+	}
 }
 
 
