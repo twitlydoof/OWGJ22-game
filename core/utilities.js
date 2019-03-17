@@ -108,11 +108,17 @@ var Keyboard = {
 
 window.addEventListener("keyup", function(event)
 {
-	Keyboard.onKeyUp(event.keyCode);
-	delete Keyboard._pressed[event.keyCode];
+	if (Keyboard._pressed[event.keyCode])
+	{
+		Keyboard.onKeyUp(event.keyCode);
+		delete Keyboard._pressed[event.keyCode];
+	}
 }, false);
 window.addEventListener("keydown", function(event)
 {
-	Keyboard.onKeyDown(event.keyCode);
-	Keyboard._pressed[event.keyCode] = true;
+	if (!Keyboard._pressed[event.keyCode])
+	{
+		Keyboard.onKeyDown(event.keyCode);
+		Keyboard._pressed[event.keyCode] = true;
+	}
 }, false);
