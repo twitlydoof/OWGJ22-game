@@ -2,7 +2,7 @@ var player = new GameObject(new Vector2(WIDTH/2-25, 10), new Vector2(50, 50));
 let playerMinX = player.size.x;
 let playerMaxX = WIDTH-player.size.x;
 let playerMinY = 10;
-let playerSpeed = 300;
+let playerSpeed = 350;
 
 let fireBallTrailList = [];
 let fireBallTrailSprite = null;
@@ -45,7 +45,7 @@ player.load = function()
 
 	this.playerSprite = new Image(player.size.x, player.size.y);
 	this.playerSprite.src = 'assets/player.png';
-	this.playerSprite = new SpriteSheet("assets/powerup_ricardomilos_spritesheet.png", new Vector2(100, 100), new Vector2(100, 100));
+	//this.playerSprite = new SpriteSheet("assets/powerup_ricardomilos_spritesheet.png", new Vector2(100, 100), new Vector2(100, 100));
 	this.playerFireBallSprite = new Image(player.size.x, player.size.y);
 	this.playerFireBallSprite.src = 'assets/player_fireball.png';
 	this.attacking = false;
@@ -65,7 +65,7 @@ player.load = function()
 			context.drawImage(this.playerFireBallSprite, this.position.x, this.position.y, this.size.x + Math.random()*2, this.size.y + Math.random()*2);
 		}
 		else
-			this.playerSprite.draw(this.position.x, this.position.y);//context.drawImage(this.playerSprite, this.position.x, this.position.y);
+			context.drawImage(this.playerSprite, this.position.x, this.position.y); //this.playerSprite.draw(this.position.x, this.position.y);
 	}
 }
 
@@ -120,7 +120,7 @@ player.update = function(deltaTime)
 	else
 	{
 		this.timePassedAfterAttacking += deltaTime;
-		this.playerSprite.update(deltaTime);
+		//this.playerSprite.update(deltaTime);
 	}
 		
 

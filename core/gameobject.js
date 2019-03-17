@@ -37,13 +37,11 @@ GameObject.prototype = {
 			{
 				this.collidingWith[otherBox.id] = true;
 				this.onCollision(otherBox);
-				console.log("yes");
 			}
 			return true;
 		}
 		if (this.collidingWith[otherBox.id] == true)
 		{
-			console.log("no");
 			this.collidingWith[otherBox.id] = false;
 		}
 	

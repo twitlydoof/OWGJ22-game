@@ -9,6 +9,14 @@ function Color(r, g, b)
 	this.b = b || 0;
 }
 
+Color.prototype = {
+	equals: function(color)
+	{
+		if (this.r == color.r && this.g == color.g && this.b == color.b)
+			return true;
+		return false;
+	}
+};
 
 function setColor(color, a, b)
 {

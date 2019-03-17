@@ -6,6 +6,10 @@ const HEIGHT = canvas.height;
 const FPS = 30;
 
 const BACKGROUND_COLOR = "rgb(0, 170, 212)";
+const BACKGROUND_COLOR_RED = 0;
+const BACKGROUND_COLOR_GREEN = 170;
+const BACKGROUND_COLOR_BLUE = 212;
+
 
 
 
