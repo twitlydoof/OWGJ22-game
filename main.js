@@ -27,11 +27,6 @@ function render()
 }
 
 
-
-
-
-
-
 let _startDeltaTime;
 function leGameLoop() {
 	update((new Date() - _startDeltaTime)/1000);
