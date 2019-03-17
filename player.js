@@ -45,6 +45,7 @@ player.load = function()
 
 	this.playerSprite = new Image(player.size.x, player.size.y);
 	this.playerSprite.src = 'assets/player.png';
+	this.playerSprite = new SpriteSheet("assets/powerup_ricardomilos_spritesheet.png", new Vector2(100, 100), new Vector2(100, 100));
 	this.playerFireBallSprite = new Image(player.size.x, player.size.y);
 	this.playerFireBallSprite.src = 'assets/player_fireball.png';
 	this.attacking = false;
@@ -64,7 +65,7 @@ player.load = function()
 			context.drawImage(this.playerFireBallSprite, this.position.x, this.position.y, this.size.x + Math.random()*2, this.size.y + Math.random()*2);
 		}
 		else
-			context.drawImage(this.playerSprite, this.position.x, this.position.y);
+			this.playerSprite.draw(this.position.x, this.position.y);//context.drawImage(this.playerSprite, this.position.x, this.position.y);
 	}
 }
 
@@ -77,7 +78,7 @@ player.update = function(deltaTime)
 		//this is up here, so that just in case can be
 		//automatically be removed by the following conditions
 
-		if (this.timePassedWhileAttacking >= 0.8)
+		if (this.timePassedWhileAttacking >= 0.3)
 		{
 			this.velocity.y = 0;
 		} 
@@ -97,7 +98,7 @@ player.update = function(deltaTime)
 			}
 			else
 			{
-				this.velocity.y = -playerSpeed*0.5;
+				this.velocity.y = -playerSpeed*2;
 			}
 		}
 
@@ -119,6 +120,7 @@ player.update = function(deltaTime)
 	else
 	{
 		this.timePassedAfterAttacking += deltaTime;
+		this.playerSprite.update(deltaTime);
 	}
 		
 
@@ -154,7 +156,7 @@ Keyboard.onKeyDown = function(key)
 		player.size.x = 75;
 		player.size.y = 75;
 		player.position.x = player.position.x - 12;
-		player.velocity.y = playerSpeed*2;
+		player.velocity.y = playerSpeed*4;
 
 		player.timePassedWhileAttacking = 0;
 		player.attacking = true;
